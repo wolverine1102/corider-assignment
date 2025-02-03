@@ -3,6 +3,6 @@ flask-restful
 flask-pymongo
 flask-bcrypt
 flask-jwt-extended
-marshmallow
+flask_marshmallow
 flask-swagger-ui
 python-dotenv
