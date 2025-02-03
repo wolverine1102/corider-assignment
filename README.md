@@ -1,4 +1,4 @@
-# Online-Bookstore-Backend
+# CoRider Flask Assignment
 
 
 ### To run the app -
