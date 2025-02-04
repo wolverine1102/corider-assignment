@@ -29,17 +29,17 @@ ADMIN_PASSWORD=<your_admin_password>
 
 ```
 
-3. Create the Docker image:
-```
-docker build -t <image_name> .
-```
-
-4. Build the services using Docker Compose:
+3. Build the docker images based on the ```docker-compose.yml``` file:
 ```
 docker-compose build
 ```
 
-5. Access the app at:
+4. To start the services and launch the containers defined in the ```docker-compose.yml``` file.:
+```
+docker-compose up
+```
+
+4. Access the app at:
 ```
 http://127.0.0.1:5000/
 ```
