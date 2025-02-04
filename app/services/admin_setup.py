@@ -1,6 +1,7 @@
 import os
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
+from ..utils.id_generator import generate_random_id
 
 def admin_setup(mongo: PyMongo, bcrypt: Bcrypt):
     ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
@@ -12,6 +13,7 @@ def admin_setup(mongo: PyMongo, bcrypt: Bcrypt):
     if admin is None:
         hashed_password = bcrypt.generate_password_hash(f"{ADMIN_PASSWORD}").decode("utf-8")
         users_collection.insert_one({
+            "id": generate_random_id(),
             "email": f"{ADMIN_EMAIL}",
             "password": hashed_password,
             "role": "admin"

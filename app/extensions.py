@@ -9,3 +9,10 @@ mongo = PyMongo()
 bcrypt = Bcrypt()
 ma = Marshmallow()
 jwt = JWTManager()
+
+@jwt.user_identity_loader
+def user_identity_lookup(user):
+    return {
+        "id": user["id"],
+        "role": user["role"]
+    }

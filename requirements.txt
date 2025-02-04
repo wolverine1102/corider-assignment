@@ -4,5 +4,4 @@ flask-pymongo
 flask-bcrypt
 flask-jwt-extended
 flask_marshmallow
-flask-swagger-ui
 python-dotenv
