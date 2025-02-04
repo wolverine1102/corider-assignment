@@ -1,9 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from flask_restful import Api, Resource
 from flask_jwt_extended import create_access_token
 from marshmallow import ValidationError
 from ..extensions import mongo, bcrypt
-from ..schemas.users import UserSchema, users_schema
+from ..schemas.users import user_schema
 from ..utils.id_generator import generate_random_id
 from ..errors.exceptions import BusinessValidationError
 
@@ -14,7 +14,7 @@ api = Api(auth_bp)
 class LoginResource(Resource):
     def post(self):
         try:
-            data = users_schema.load(request.get_json())
+            data = user_schema.load(request.get_json())
         except ValidationError as err:
             return err.messages, 400
 
@@ -26,15 +26,15 @@ class LoginResource(Resource):
             )
         
         else:
-            response = users_schema.dump(user)
-            response["token"] = create_access_token(identity=user)
+            response = user_schema.dump(user)
+            response["token"] = create_access_token(identity=user["id"])
             return response, 200
                  
 
 class RegisterResource(Resource):
     def post(self):
         try:
-            data = users_schema.load(request.get_json())
+            data = user_schema.load(request.get_json())
         except ValidationError as err:
             return err.messages, 400
         
@@ -47,8 +47,8 @@ class RegisterResource(Resource):
             inserted_user = mongo.db.users.insert_one(data)
             new_user = mongo.db.users.find_one({"_id": inserted_user.inserted_id})
 
-            response = users_schema.dump(new_user)
-            response["token"] = create_access_token(identity=new_user)
+            response = user_schema.dump(new_user)
+            response["token"] = create_access_token(identity=new_user["id"])
             return response, 200
 
         else:
@@ -56,6 +56,7 @@ class RegisterResource(Resource):
                 status_code=400,
                 error_message="User with this email already exists"
             )
+
 
 api.add_resource(LoginResource, "/login")
 api.add_resource(RegisterResource, "/register")

@@ -11,4 +11,5 @@ class UserSchema(ma.Schema):
         validate=validate.OneOf(["admin", "user"])
     )
 
-users_schema = UserSchema()
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
