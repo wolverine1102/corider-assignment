@@ -9,12 +9,24 @@ git clone https://github.com/wolverine1102/corider-assignment.git
 
 2. Create an ```.env``` file in the root directory and add the following environment variables:
 ```
-JWT_SECRET_KEY
-USERNAME
-PASSWORD
-DB
-ADMIN_EMAIL
-ADMIN_PASSWORD
+# Secret key used to sign JWT tokens
+JWT_SECRET_KEY=<your_jwt_secret_key>
+
+# Database username for connecting to MongoDB
+USERNAME=<your_database_username>
+
+# Database password for authentication
+PASSWORD=<your_database_password>
+
+# Name of the MongoDB database
+DB=<your_database_name>
+
+# Admin email address for authentication
+ADMIN_EMAIL=<your_admin_email>
+
+# Admin password for authentication
+ADMIN_PASSWORD=<your_admin_password>
+
 ```
 
 3. Create the Docker image:
