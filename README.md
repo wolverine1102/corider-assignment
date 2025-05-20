@@ -1,4 +1,4 @@
-# CoRider Flask Assignment
+# CoRider-Flask-Assignment
 
 
 ### To run the app -
